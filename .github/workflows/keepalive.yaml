@@ -25,15 +25,15 @@ jobs:
           LAST_COMMIT=$(git log -1 --pretty=format:"%cd" --date=format:"%Y-%m-%d")
           OK_AFTER=$(date --date="14 day ago" +%Y-%m-%d)
 
-          if [[ "${LAST_COMMIT}" < "${OK_AFTER}" ]]; then
+          if [[ "1" == "1" ]]; then
             echo "Last commit ${LAST_COMMIT} is too long ago, trying to update repo."
 
             while [[ true ]]; do
               # Reset repo state
-              git init . && git checkout --orphan "${BRANCH}"
+              git checkout --orphan "${BRANCH}"
               date +%Y-%m-%dT%H:%M:%S > .github/keepalive.txt
-              git add .github/keepalive.txt && git status && git commit --message "${MESSAGE}"
-              git push -f "${BRANCH}"
+              git reset && git add .github/keepalive.txt && git commit --message "${MESSAGE}"
+              git push -f --set-upstream origin "${BRANCH}"
 
               if [[ "$?" == "0" ]]; then
                 echo "Keepalive commit successful."
