@@ -25,7 +25,7 @@ jobs:
           LAST_COMMIT=$(git log -1 --pretty=format:"%cd" --date=format:"%Y-%m-%d")
           OK_AFTER=$(date --date="14 day ago" +%Y-%m-%d)
 
-          if [[ "1" == "1" ]]; then
+          if [[ "${LAST_COMMIT}" < "${OK_AFTER}" ]]; then
             echo "Last commit ${LAST_COMMIT} is too long ago, trying to update repo."
 
             while [[ true ]]; do
