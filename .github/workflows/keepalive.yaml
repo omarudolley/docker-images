@@ -22,7 +22,7 @@ jobs:
 
       - name: Update if necessary
         run: |
-          echo git log 
+          echo $(git log)
           LAST_COMMIT=$(git log -1 --pretty=format:"%cd" --date=format:"%Y-%m-%d")
           OK_AFTER=$(date --date="14 day ago" +%Y-%m-%d)
 
