@@ -15,7 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: keepalive
           fetch-depth: 0
 
       - name: Prepare git
@@ -25,7 +24,7 @@ jobs:
 
       - name: Update if necessary
         run: |
-          echo $(git log -10)
+          echo $(git log -all -20)
           LAST_COMMIT=$(git log -1 --pretty=format:"%cd" --date=format:"%Y-%m-%d")
           OK_AFTER=$(date --date="14 day ago" +%Y-%m-%d)
 
